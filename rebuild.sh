@@ -1,0 +1,3 @@
+#!/bin/bash
+
+ant clean && ant -f build_ogm.xml clean-all && ant -f build_ogm.xml && ant compile && ant gen-jar
