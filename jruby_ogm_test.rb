@@ -27,6 +27,7 @@ FenixFramework = Java::PtIstFenixframework::FenixFramework
 # Load the domain models
 CloudTmGame  = Java::ItAlgoTheharvestarDomain::Game
 CloudTmAgent  = Java::ItAlgoTheharvestarDomain::Agent
+CloudTmTerrain  = Java::ItAlgoTheharvestarDomain::Terrain
 CloudTmRoot = Java::ItAlgoTheharvestarDomain::Root
 
 # Load the CloudTM glue framework
@@ -145,6 +146,26 @@ class CloudTmAgent
 end
 
 
+class CloudTmTerrain
+  class << self
+
+    def create attrs = {}
+      manager = CloudTmTransactionManager.manager
+      manager.withTransaction do
+
+        instance = new
+        attrs.each do |attr, value|
+          instance.send("#{attr}=", value)
+        end
+        manager.save instance
+        #instance.set_root manager.getRoot
+      end
+    end
+
+  end
+end
+
+
 FenixLoader.load({
     :dml => 'theharvestar.dml',
     :conf => 'infinispanNoFile.xml'
@@ -161,4 +182,10 @@ CloudTmGame.create(:name => 'test-game')
 
 _manager.withTransaction do
   puts "Games after create: #{_manager.getRoot.getGames.count}"
+end
+
+_manager.withTransaction do
+  game = CloudTmGame.create(:name => 'test-game')
+  terrain1 = CloudTmTerrain.create(:terrain_type => 'water')
+  puts terrain1.terrain_type
 end

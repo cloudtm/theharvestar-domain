@@ -8,6 +8,8 @@ public abstract class TxSystem {
   private static final String TX_MGR_HIB = "org.cloudtm.framework.ogm.HibOgmTxManager";
   private static final String TX_MGR_ISPN = "org.cloudtm.framework.ispn.IspnTxManager";
   private static final String[] TX_MGR = new String[]{TX_MGR_FF, TX_MGR_HIB, TX_MGR_ISPN};
+  private static Config currentConfig = null;
+  private static CloudtmConfig.Framework currentFramework = null;
 
   private static TxManager createTxManagerInstance(Config config, CloudtmConfig.Framework framework) {
     String txMgrClassname = null;
@@ -32,6 +34,7 @@ public abstract class TxSystem {
       TxManager txInstance = txMgr.newInstance();
       //TxManager txInstance = new HibOgmTxManager();
       txInstance.configure(config);
+      System.out.println("Configured TxManager of type: " + txMgrClassname);
       return txInstance;
       
     } catch (ClassNotFoundException cnfe) {
@@ -55,10 +58,18 @@ public abstract class TxSystem {
   private static TxManager txManager = null;
 
   public static void initialize(Config config, CloudtmConfig.Framework framework) {
+    if(currentConfig == null) {
+      currentConfig = config;
+      currentFramework = framework;
+    }
     txManager = createTxManagerInstance(config, framework);
   }
 
   public static TxManager getManager() {
+    if(txManager == null) {
+      System.out.println("The tx manager is null!!!");
+      initialize(currentConfig, currentFramework); 
+    }
     return txManager;
   }
 }

@@ -32,9 +32,19 @@ public class HibOgmTxManager extends TxManager {
     SessionFactoryImplementor sessionFactory = (SessionFactoryImplementor) ((HibernateEntityManagerFactory) emf).getSessionFactory();
     transactionManager = sessionFactory.getServiceRegistry().getService(JtaPlatform.class).retrieveTransactionManager();
   }
-  private static final ThreadLocal<EntityManager> currentEntityManager = new ThreadLocal<EntityManager>();
+
+  //private static final ThreadLocal<EntityManager> currentEntityManager = new ThreadLocal<EntityManager>();
+  private static ThreadLocal<EntityManager> currentEntityManager = new ThreadLocal<EntityManager>();
 
   private static EntityManager getEntityManager() {
+    /*
+    EntityManager em = currentEntityManager.get();
+    if(em == null) {
+      em = emf.createEntityManager();
+      System.out.println("Created Entity Manager in SAVE");
+      currentEntityManager.set(em);
+    }
+    */
     return currentEntityManager.get();
   }
 
@@ -44,6 +54,10 @@ public class HibOgmTxManager extends TxManager {
   }
 
   public void save(Object obj) {
+    System.out.println("SAVE");
+    if(getEntityManager() == null) {
+      System.out.println("entity manager is null!!");
+    }
     getEntityManager().persist(obj);
   }
 
@@ -80,6 +94,7 @@ public class HibOgmTxManager extends TxManager {
           inTopLevelTransaction = true;
         }
         em = emf.createEntityManager();
+        System.out.println("Created Entity Manager");
         currentEntityManager.set(em);
 
         // do some work

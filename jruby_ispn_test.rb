@@ -25,7 +25,7 @@ FenixFramework = Java::PtIstFenixframework::FenixFramework
 
 # Load the domain models
 Game = Java::ItAlgoTheharvestarDomain::Game
-Agent = Java::ItAlgoTheharvestarDomain::Agent
+Player = Java::ItAlgoTheharvestarDomain::Player
 
 FenixRoot = Java::ItAlgoTheharvestarDomain::Root
 
@@ -158,24 +158,19 @@ class Game
 end
 
 
-class Agent
+class Player
   class << self
     def create group, attrs = {}
       manager = CloudTmTransactionManager.manager
-      #manager.withTransaction do
-
         instance = new
         attrs.each do |attr, value|
           instance.send("#{attr}=", value)
         end
         manager.save instance
-        group.addAgents(instance)
-#      end
     end
   end
 
   def destroy
-    #getAgentGroup.removeAgents(self)
   end
 end
 

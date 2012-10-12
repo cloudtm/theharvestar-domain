@@ -343,41 +343,4 @@ public class IspnTxManager extends TxManager {
    }
 
 
-   //Test code
-
-   public IspnTxManager(){
-       super();
-       testLogging();
-       log_error(new Throwable("test error"), "ops");
-      }
-
-   private static void testLogging(){
-
-        // System.err.println(log.getLevel());
-
-
-         log.fatal("===========================================");
-
-         //if(log.isFatalEnabled())
-             log.fatal("FATAL");
-
-         //if(log.isErrorEnabled())
-             log.error("ERROR");
-
-         //if(log.isWarnEnabled())
-             log.warn("WARN");
-
-         if(log.isInfoEnabled())
-              log.info("INFO");
-
-         if(log.isDebugEnabled())
-              log.debug("DEBUG");
-
-         if(log.isTraceEnabled())
-             log.trace("TRACE");
-
-         log.fatal("===========================================");
-
-   }
-
 }
