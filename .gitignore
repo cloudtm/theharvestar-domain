@@ -1,0 +1,13 @@
+/build
+/classes
+/classes-devel
+/src_gen
+.idea
+/old
+*.class
+old
+/target
+/src/main/java
+.DS_Store
+
+transaction.log
