@@ -14,11 +14,11 @@ In order to generate the harvestar domain model do the following:
     mvn clean package
 3. Copy the new domain model from the /target directory, inside the the harvestar folder lib/cloud_tm/jars and the dml inside lib/cloud_tm/conf
 
-*Note*  You may need to copy the DML jars into geograph by executing the following commands:
+*Note*  You may need to copy the DML jars into the harvestar by executing the following commands:
 
  find ~/.m2/repository/pt/ist -name \*.jar | grep 2.0-cloudtm | grep SNAPSHOT.jar > libs_paths
 
- for i in `cat libs_paths`; do cp $i PATH_TO_GEPGRAPH/lib/cloud_tm/jars; done
+ for i in `cat libs_paths`; do cp $i PATH_TO_THE_HARVESTAR/lib/cloud_tm/jars; done
 
 in your lib folder (instead of fenix-framework jar as for DML v1)
 
