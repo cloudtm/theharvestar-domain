@@ -11,3 +11,5 @@ old
 .DS_Store
 
 transaction.log
+
+libs_paths
