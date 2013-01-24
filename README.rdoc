@@ -16,11 +16,9 @@ In order to generate the harvestar domain model do the following:
     cp target/the-harvestar-domain-1.0-SNAPSHOT.jar PATH_TO_THE_HARVESTAR/lib/cloud_tm/jars/
     cp src/main/dml/theharvestar.dml PATH_TO_THE_HARVESTAR/lib/cloud_tm/conf/
 
-*Note*  You may need to copy the DML jars into the harvestar by executing the following commands:
+*Note*  You may need to copy the DML jars into the harvestar by executing the following command:
 
- find ~/.m2/repository/pt/ist -name \*.jar | grep 2.0-cloudtm | grep SNAPSHOT.jar > libs_paths
-
- for i in `cat libs_paths`; do cp $i PATH_TO_THE_HARVESTAR/lib/cloud_tm/jars; done
+  mvn dependency:copy-dependencies -DincludeGroupIds=pt.ist -DoutputDirectory=$PATH_TO_THE_HARVESTAR/lib/cloud_tm/jars/
 
 in your lib folder (instead of fenix-framework jar as for DML v1)
 
