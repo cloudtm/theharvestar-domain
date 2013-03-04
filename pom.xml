@@ -13,7 +13,7 @@
     <fenixframework.code.generator>pt.ist.fenixframework.backend.infinispan.InfinispanCodeGenerator
     </fenixframework.code.generator>
     <!-- <fenixframework.code.generator>pt.ist.fenixframework.backend.ogm.OgmCodeGenerator</fenixframework.code.generator> -->
-    <version.fenixframework>2.0-cloudtm</version.fenixframework>
+    <version.fenixframework>2.2-cloudtm-SNAPSHOT</version.fenixframework>
   </properties>
 
   <build>

@@ -38,7 +38,7 @@ valueType java.util.Date as JavaDate {
 class Game {
   String state;
   String name;
-  String format;
+  String formatValue;
   Integer version;
   Integer socialCount;
   Integer transportCount;
@@ -81,12 +81,18 @@ class Road {
   boolean fromProgress;
 }
 
+
 class RedProgress {
   String type;
   boolean used;
   JavaDate createdAt;
   JavaDate updatedAt;
 }
+
+class CulturalProgress extends RedProgress {}
+class RecyclingProgress extends RedProgress {}
+class SocialProgress extends RedProgress {}
+class TransportProgress extends RedProgress {}
 
 class Offer {
   String message;
@@ -105,6 +111,9 @@ class ResourceHash {
   int grain;
 }
 
+class Calamity {
+  String calamity_type;
+}
 
 // This is the root domain object
 class Root {}
@@ -184,9 +193,24 @@ relation PlayerHasRoads {
   Road playsRole roads { multiplicity *; }
 }
 
-relation PlayerHasRedProgresses {
+relation PlayerHasCulturals {
   Player playsRole player;
-  RedProgress playsRole redProgresses { multiplicity *; }
+  CulturalProgress playsRole culturalProgresses { multiplicity *; }
+}
+
+relation PlayerHasRecyclings {
+  Player playsRole player;
+  RecyclingProgress playsRole recyclingProgresses { multiplicity *; }
+}
+
+relation PlayerHasSocials {
+  Player playsRole player;
+  SocialProgress playsRole socialProgresses { multiplicity *; }
+}
+
+relation PlayerHasTransports {
+  Player playsRole player;
+  TransportProgress playsRole transportProgresses { multiplicity *; }
 }
 
 relation PlayerHasTradeRequest {
@@ -217,4 +241,14 @@ relation OfferHasReceive {
 relation OfferHasGive {
   Offer playsRole;
   ResourceHash playsRole give;
+}
+
+relation GameHasCalamity {
+  Game playsRole game;
+  Calamity playsRole calamity;
+}
+
+relation CalamityHasTerrain {
+  Calamity playsRole calamity;
+  Terrain playsRole terrain;
 }
