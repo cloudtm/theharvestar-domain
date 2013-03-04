@@ -193,24 +193,9 @@ relation PlayerHasRoads {
   Road playsRole roads { multiplicity *; }
 }
 
-relation PlayerHasCulturals {
+relation PlayerHasRedProgresses {
   Player playsRole player;
-  CulturalProgress playsRole culturalProgresses { multiplicity *; }
-}
-
-relation PlayerHasRecyclings {
-  Player playsRole player;
-  RecyclingProgress playsRole recyclingProgresses { multiplicity *; }
-}
-
-relation PlayerHasSocials {
-  Player playsRole player;
-  SocialProgress playsRole socialProgresses { multiplicity *; }
-}
-
-relation PlayerHasTransports {
-  Player playsRole player;
-  TransportProgress playsRole transportProgresses { multiplicity *; }
+  RedProgress playsRole redProgresses { multiplicity *; }
 }
 
 relation PlayerHasTradeRequest {
